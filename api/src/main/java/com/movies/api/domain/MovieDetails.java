@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "tb_movie_details")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

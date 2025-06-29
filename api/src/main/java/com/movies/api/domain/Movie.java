@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
+@Table(name = "tb_movie")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +27,7 @@ public class Movie {
 
     @ManyToMany
     @JoinTable(
-            name = "movie_director",
+            name = "tb_movie_director",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "director_id")
     )

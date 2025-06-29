@@ -22,7 +22,7 @@ public class Award {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "movie_details_id")
+    @JoinColumn(name = "movie_details_id", nullable = false)
     private MovieDetails movieDetails;
 
     private Long year;

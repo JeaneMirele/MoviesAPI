@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -23,7 +23,7 @@ public class MovieDetails {
     private String detailesSynopsis;
 
     @NotNull(message = "Release time is required.")
-    private LocalTime releaseDate;
+    private LocalDate releaseDate;
 
     @NotBlank(message = "Trailer URL is required.")
     private String trailerUrl;

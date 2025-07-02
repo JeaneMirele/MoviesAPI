@@ -1,6 +1,7 @@
 package com.movies.api.services;
 
 import com.movies.api.domain.Movie;
+import com.movies.api.repositorys.MovieRepository;
 import com.movies.api.services.generic.AbstractService;
 import org.springframework.stereotype.Service;
 

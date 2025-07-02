@@ -22,4 +22,6 @@ public class Rent extends OrderItem{
     private RentStatus status;
 
     private LocalDateTime expirationDate;
+
+
 }

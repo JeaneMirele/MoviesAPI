@@ -17,7 +17,6 @@ import org.hibernate.annotations.SQLRestriction;
 @Table(name = "tb_client")
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @SQLDelete(sql = "UPDATE tb_client SET deleted_at = CURRENT_TIMESTAMP where id=?")

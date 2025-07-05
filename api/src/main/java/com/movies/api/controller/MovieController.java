@@ -26,9 +26,14 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<Page<MovieResponseDto>> getAll(Pageable pageable) {
-        var result = movieService.listAll(pageable);
-        var response = result.map(movieMapper::toResponseDto);
-        return ResponseEntity.ok(response);
+        var result = movieService.listAll(pageable).map(movieMapper::toResponseDto);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<MovieResponseDto> getById(@PathVariable Long id) {
+        var result = movieService.listById(id);
+        return ResponseEntity.ok(movieMapper.toResponseDto(result));
     }
 
     @PostMapping
@@ -36,4 +41,5 @@ public class MovieController {
         movieService.create(movieMapper.toMovie(movieSaveRequestDto));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 }

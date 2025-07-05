@@ -2,10 +2,9 @@ package com.movies.api.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.util.List;
 
@@ -14,10 +13,10 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
+@SQLDelete(sql = "UPDATE tb_director SET deleted_at = CURRENT_TIMESTAMP where id=?")
+@SQLRestriction("deleted_at is null")
 public class Director extends BaseEntity {
-
-    @NotBlank
+//    @NotBlank
     private String name;
 
     @ManyToMany(mappedBy = "directors")

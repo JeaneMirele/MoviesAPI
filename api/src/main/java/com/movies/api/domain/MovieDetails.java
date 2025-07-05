@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,23 +19,17 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLDelete(sql = "UPDATE tb_movie_details SET deleted_at = CURRENT_TIMESTAMP where id=?")
+@SQLRestriction("deleted_at is null")
 public class MovieDetails extends BaseEntity {
+    private String detailedSynopsis;
 
-    @NotBlank(message = "Detailed synopsis is required.")
-    private String detailesSynopsis;
-
-    @NotNull(message = "Release time is required.")
     private LocalDate releaseDate;
 
-    @NotBlank(message = "Trailer URL is required.")
     private String trailerUrl;
 
-    @NotNull(message = "Rating is required.")
-    @DecimalMin(value = "0.0", inclusive = true, message = "Rating must be at least 0.")
-    @DecimalMax(value = "10.0", inclusive = true, message = "Rating must be at most 10.")
     private Float rate;
 
     @OneToMany(mappedBy = "movieDetails")
     private List<Award> awards;
-
 }

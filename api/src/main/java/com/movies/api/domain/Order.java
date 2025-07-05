@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import jakarta.persistence.CascadeType;
@@ -19,9 +20,10 @@ import jakarta.validation.constraints.NotNull;
 @Table(name = "tb_order")
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLDelete(sql = "UPDATE tb_order SET deleted_at = CURRENT_TIMESTAMP where id=?")
+@SQLRestriction("deleted_at is null")
 public class Order extends BaseEntity {
 
     @NotNull

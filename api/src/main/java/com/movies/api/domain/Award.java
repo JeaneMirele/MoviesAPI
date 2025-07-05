@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Table(name = "tb_award")
@@ -13,17 +15,14 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLDelete(sql = "UPDATE tb_award SET deleted_at = CURRENT_TIMESTAMP where id=?")
+@SQLRestriction("deleted_at is null")
 public class Award extends BaseEntity {
-
-    @NotBlank(message = "Title is required.")
     private String title;
-
-    @NotBlank(message = "Description is required.")
     private String description;
+    private Long year;
 
     @ManyToOne
     @JoinColumn(name = "movie_details_id", nullable = false)
     private MovieDetails movieDetails;
-
-    private Long year;
 }

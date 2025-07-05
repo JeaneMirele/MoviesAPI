@@ -14,4 +14,8 @@ public interface DirectorMapper {
     @Mapping(target = "id", source = "id")
     Director toDirectorIdDto(DirectorIdDto directorIdDto);
 
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    DirectorResponseDto toDirectorResponseDto(Director director);
+
 }

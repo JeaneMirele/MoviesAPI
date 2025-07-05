@@ -12,7 +12,7 @@ public class MovieResponseDto {
     private Long id;
     private String title;
     private String synopsis;
-    private String directorName;
+    private List<DirectorResponseDto> directors;
     private Genre genre;
     private Double price;
     private String ageRating;

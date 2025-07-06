@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "9b5cbb75-3e25-4e76-af28-1c680c44808a",
+		"name": "MoviesAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36152665"
+	},
+	"item": [
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Register Movies",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Filme de Exemplo 01\",\n    \"synopsis\": \"Isso aqui é um filme\",\n    \"directors\": [\n        {\n            \"id\": 1\n        }\n    ],\n    \"genre\": \"COMEDY\",\n    \"price\": 20.00,\n    \"ageRating\": \"Livre\",\n    \"movieDetails\": {\n        \"detailedSynopsis\": \"É só um filme\",\n        \"releaseDate\": \"2020-01-01\",\n        \"trailerUrl\": \"https://www.google.com\",\n        \"rate\": 5.5,\n        \"awards\": [\n            {\n                \"title\": \"Prêmio 01\",\n                \"description\": \"É um prêmio\",\n                \"year\": 2021\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movies",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"title\": \"Filme de Exemplo ALTERADO 01\",\n    \"synopsis\": \"Isso aqui é um filme\",\n    \"genre\": \"COMEDY\",\n    \"price\": 20.0,\n    \"ageRating\": \"Livre\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movies By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Paginated Movies",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

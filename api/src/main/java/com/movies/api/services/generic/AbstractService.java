@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 public abstract class AbstractService<T, ID, Repo extends JpaRepository<T, ID>> implements InterfaceCrud<T, ID> {
-    private final Repo repository;
+    protected final Repo repository;
 
     public AbstractService(Repo repository) {
         this.repository = repository;

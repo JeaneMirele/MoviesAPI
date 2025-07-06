@@ -1,6 +1,7 @@
 package com.movies.api.services.generic;
 
 import com.movies.api.services.InterfaceCrud;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,8 +29,8 @@ public abstract class AbstractService<T, ID, Repo extends JpaRepository<T, ID>> 
     @Override
     public T listById(ID id) {
         Optional<T> op = repository.findById(id);
-        return op.orElseThrow(() -> new RuntimeException("Not found"));
-        //Vou deixar essa exception, enquanto não fazemos o handler
+        return op.orElseThrow(() -> new EntityNotFoundException("Not found"));
+
     }
 
     @Override

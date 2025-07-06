@@ -9,21 +9,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Table(name = "tb_client")
 @Data
-@Builder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@SQLDelete(sql = "UPDATE tb_client SET deleted_at = CURRENT_TIMESTAMP where id=?")
+@SQLRestriction("deleted_at is null")
+public class Client extends BaseEntity {
 
     @NotBlank(message = "Name is required")
     private String name;

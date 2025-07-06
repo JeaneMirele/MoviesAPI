@@ -3,34 +3,29 @@ package com.movies.api.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_order")
 @Data
-@Builder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+@SQLDelete(sql = "UPDATE tb_order SET deleted_at = CURRENT_TIMESTAMP where id=?")
+@SQLRestriction("deleted_at is null")
+public class Order extends BaseEntity {
+
     @NotNull
     private LocalDate date;
 

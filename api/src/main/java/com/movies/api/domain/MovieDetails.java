@@ -30,6 +30,7 @@ public class MovieDetails extends BaseEntity {
 
     private Float rate;
 
-    @OneToMany(mappedBy = "movieDetails")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "movie_details_id", nullable = false)
     private List<Award> awards;
 }

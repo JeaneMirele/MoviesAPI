@@ -1,5 +1,6 @@
 package com.movies.api.handler;
 
+import com.movies.api.dto.ErrorResponseDto;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> buildErrorResponse(Exception ex, HttpStatus status, WebRequest request) {
         String path = request.getDescription(false).replace("uri=", "");
-        ErrorResponseDTO error = new ErrorResponseDTO(
+        ErrorResponseDto error = new ErrorResponseDto(
                 status.value(),
                 ex.getMessage(),
                 status.getReasonPhrase(),

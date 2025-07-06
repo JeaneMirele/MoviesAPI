@@ -1,13 +1,9 @@
 package com.movies.api.dto;
 
-import com.movies.api.domain.Award;
-import com.movies.api.domain.Genre;
-import com.movies.api.domain.MovieDetails;
-import jakarta.persistence.OneToMany;
+import com.movies.api.domain.enums.Genre;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
 @Data
 @NoArgsConstructor

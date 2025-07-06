@@ -1,6 +1,6 @@
 package com.movies.api.dto;
 
-import com.movies.api.domain.Genre;
+import com.movies.api.domain.enums.Genre;
 import lombok.*;
 
 import java.util.List;

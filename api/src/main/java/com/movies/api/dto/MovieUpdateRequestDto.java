@@ -1,6 +1,6 @@
 package com.movies.api.dto;
 
-import com.movies.api.domain.Genre;
+import com.movies.api.domain.enums.Genre;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

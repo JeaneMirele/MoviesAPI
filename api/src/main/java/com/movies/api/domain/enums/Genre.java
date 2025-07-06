@@ -1,4 +1,4 @@
-package com.movies.api.domain;
+package com.movies.api.domain.enums;
 
 public enum Genre {
     COMEDY,

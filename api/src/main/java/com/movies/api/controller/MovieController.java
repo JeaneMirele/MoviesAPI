@@ -2,6 +2,7 @@ package com.movies.api.controller;
 
 import com.movies.api.dto.MovieResponseDto;
 import com.movies.api.dto.MovieSaveRequestDto;
+import com.movies.api.dto.MovieUpdateRequestDto;
 import com.movies.api.mapper.MovieMapper;
 import com.movies.api.services.MovieService;
 import jakarta.validation.Valid;
@@ -37,9 +38,20 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody MovieSaveRequestDto movieSaveRequestDto) {
-        movieService.create(movieMapper.toMovie(movieSaveRequestDto));
+    public ResponseEntity<?> save(@Valid @RequestBody MovieSaveRequestDto dto) {
+        movieService.create(movieMapper.toMovie(dto));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PutMapping
+    public ResponseEntity<?> update(@Valid @RequestBody MovieUpdateRequestDto dto) {
+        movieService.update(dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        movieService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

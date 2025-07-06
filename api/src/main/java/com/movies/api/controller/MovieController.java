@@ -1,10 +1,7 @@
 package com.movies.api.controller;
 
 import com.movies.api.domain.MovieDetails;
-import com.movies.api.dto.MovieDetailsDto;
-import com.movies.api.dto.MovieResponseDto;
-import com.movies.api.dto.MovieSaveRequestDto;
-import com.movies.api.dto.MovieUpdateRequestDto;
+import com.movies.api.dto.*;
 import com.movies.api.mapper.MovieDetailsMapper;
 import com.movies.api.mapper.MovieMapper;
 import com.movies.api.services.MovieDetailsService;
@@ -68,17 +65,15 @@ public class MovieController {
         return ResponseEntity.ok(result);
     }
 
-    /*
-          PUT /movie/{id}/details
-          - Request: MovieDetails completo
-          - Ação: Altera MovieDetails completo (inclusive do Awards)
-          - Acesso: ADMIN
-     */
-
     @PutMapping("{id}/details")
     public ResponseEntity<?> updateMovieDetails(@PathVariable Long id, @RequestBody MovieDetailsDto dto) {
         this.movieService.updateMovieDetailsByMovieId(id, dto);
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("{id}/directors")
+    public ResponseEntity<?> updateDirectors(@PathVariable Long id, @RequestBody MovieDirectorsUpdateRequestDto dto) {
+        movieService.updateMovieDirectors(id, dto);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,8 +1,8 @@
 package com.movies.api.mapper;
 
 import com.movies.api.domain.Director;
-import com.movies.api.dto.DirectorIdDto;
-import com.movies.api.dto.DirectorResponseDto;
+import com.movies.api.domain.Movie;
+import com.movies.api.dto.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -11,11 +11,19 @@ import org.mapstruct.factory.Mappers;
 public interface DirectorMapper {
     DirectorMapper INSTANCE = Mappers.getMapper(DirectorMapper.class);
 
-    @Mapping(target = "id", source = "id")
     Director toDirectorIdDto(DirectorIdDto directorIdDto);
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
     DirectorResponseDto toDirectorResponseDto(Director director);
 
+    @Mapping(target = "movieTitles", source = "movies")
+    DirectorWithMovieNamesDto toDirectorWithMovieNames(Director director);
+
+    Director toEntity(DirectorSaveRequestDto directorSaveRequestDto);
+    Director toEntity(DirectorUpdateRequestDto directorUpdateRequestDto);
+    default String map(Movie movie) {
+        if (movie == null) {
+            return null;
+        }
+        return movie.getTitle();
+    }
 }

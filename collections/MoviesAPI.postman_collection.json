@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a30f8b07-25e0-440e-82b5-2ebf6b923bc5",
+		"_postman_id": "f3a77e45-9332-437d-8d28-0e1a9462e8da",
 		"name": "MoviesAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "36152665"
@@ -9,6 +9,62 @@
 		{
 			"name": "Movies",
 			"item": [
+				{
+					"name": "MovieDetails",
+					"item": [
+						{
+							"name": "Get MovieDetails By Movie Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/movies/1/details",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies",
+										"1",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update MovieDetails By Movie Id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"detailedSynopsis\": \"É só um filme\",\n    \"releaseDate\": \"2020-01-01\",\n    \"trailerUrl\": \"https://www.youtube.com\",\n    \"rate\": 8.5,\n    \"awards\": [\n        {\n            \"title\": \"Prêmio 01\",\n            \"description\": \"É um prêmio\",\n            \"year\": 2021\n        },\n         {\n            \"title\": \"Prêmio 02\",\n            \"description\": \"É um prêmio nível 2\",\n            \"year\": 2022\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/movies/1/details",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies",
+										"1",
+										"details"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "Register Movies",
 					"request": {

@@ -1,9 +1,10 @@
 package com.movies.api.controller;
 
-import com.movies.api.dto.MovieResponseDto;
-import com.movies.api.dto.MovieSaveRequestDto;
-import com.movies.api.dto.MovieUpdateRequestDto;
+import com.movies.api.domain.MovieDetails;
+import com.movies.api.dto.*;
+import com.movies.api.mapper.MovieDetailsMapper;
 import com.movies.api.mapper.MovieMapper;
+import com.movies.api.services.MovieDetailsService;
 import com.movies.api.services.MovieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,12 @@ import java.net.URI;
 public class MovieController {
     private final MovieService movieService;
     private final MovieMapper movieMapper;
-    public MovieController(MovieService movieService, MovieMapper movieMapper) {
+    private final MovieDetailsMapper movieDetailsMapper;
+
+    public MovieController(MovieService movieService, MovieMapper movieMapper, MovieDetailsMapper movieDetailsMapper) {
         this.movieService = movieService;
         this.movieMapper = movieMapper;
+        this.movieDetailsMapper = movieDetailsMapper;
     }
 
     @GetMapping
@@ -52,6 +56,24 @@ public class MovieController {
     @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         movieService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("{id}/details")
+    public ResponseEntity<MovieDetailsDto> getMovieDetailsByMovieId(@PathVariable Long id) {
+        var result = movieDetailsMapper.toMovieDetailsDto(movieService.listById(id).getMovieDetails());
+        return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("{id}/details")
+    public ResponseEntity<?> updateMovieDetails(@PathVariable Long id, @RequestBody MovieDetailsDto dto) {
+        this.movieService.updateMovieDetailsByMovieId(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("{id}/directors")
+    public ResponseEntity<?> updateDirectors(@PathVariable Long id, @RequestBody MovieDirectorsUpdateRequestDto dto) {
+        movieService.updateMovieDirectors(id, dto);
         return ResponseEntity.noContent().build();
     }
 }

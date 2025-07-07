@@ -2,12 +2,12 @@ package com.movies.api.dto;
 
 import lombok.*;
 
+import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class DirectorResponseDto {
-    private Long id;
-    private String name;
+public class MovieDirectorsUpdateRequestDto {
+    List<Long> directorIds;
 }

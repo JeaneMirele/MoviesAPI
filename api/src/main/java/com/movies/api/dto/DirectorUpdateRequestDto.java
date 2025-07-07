@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DirectorResponseDto {
+public class DirectorUpdateRequestDto {
     private Long id;
     private String name;
 }

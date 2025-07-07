@@ -21,8 +21,4 @@ public class Award extends BaseEntity {
     private String title;
     private String description;
     private Long year;
-
-    @ManyToOne
-    @JoinColumn(name = "movie_details_id", nullable = false)
-    private MovieDetails movieDetails;
 }

@@ -25,12 +25,8 @@ public class Client extends BaseEntity {
 
     @NotBlank(message = "Name is required")
     private String name;
-    
-    @NotBlank(message = "Email is required")
-    private String email;
-    
-    @NotBlank(message = "Password is required")
-    private String password;
+
+    private Boolean isAdmin;
 
     @NotBlank
     private LocalDate birthday;

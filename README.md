@@ -7,7 +7,7 @@ API REST desenvolvida em Java com Spring Boot. A aplicação realiza o gerenciam
 ## ✅ Funcionalidades
 
 - CRUD completo com Soft Delete
-- Relacionamentos entre entidades (1-1, 1-N, N-N)
+- Relacionamentos entre entidades (1-1, 1-N, N-N) mapeamento com JPA
 - DTOs para request e response
 - Autenticação com JWT (stateless)
 - Busca paginada com filtros

@@ -18,16 +18,15 @@ API REST desenvolvida em Java com Spring Boot. A aplicação realiza o gerenciam
 
 ## 🛠️ Tecnologias
 
-- Java 17  
+- Java 21  
 - Spring Boot  
 - Spring Web  
 - Spring Data JPA  
 - Spring Security  
 - PostgreSQL  
 - JWT  
-- Lombok  
-- Swagger  
-- MapStruct ou ModelMapper
+- Lombok   
+- MapStruct 
 
 ---
 

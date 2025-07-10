@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -28,6 +29,6 @@ public class Client extends BaseEntity {
 
     private Boolean isAdmin;
 
-    @NotBlank
+    @NotNull
     private LocalDate birthday;
 }

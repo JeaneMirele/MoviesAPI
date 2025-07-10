@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -42,18 +44,21 @@ public class MovieController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> save(@Valid @RequestBody MovieSaveRequestDto dto) {
         movieService.create(movieMapper.toMovie(dto));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@Valid @RequestBody MovieUpdateRequestDto dto) {
         movieService.update(dto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         movieService.deleteById(id);
         return ResponseEntity.noContent().build();
@@ -66,12 +71,14 @@ public class MovieController {
     }
 
     @PutMapping("{id}/details")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateMovieDetails(@PathVariable Long id, @RequestBody MovieDetailsDto dto) {
         this.movieService.updateMovieDetailsByMovieId(id, dto);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{id}/directors")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateDirectors(@PathVariable Long id, @RequestBody MovieDirectorsUpdateRequestDto dto) {
         movieService.updateMovieDirectors(id, dto);
         return ResponseEntity.noContent().build();

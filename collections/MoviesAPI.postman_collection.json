@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f3a77e45-9332-437d-8d28-0e1a9462e8da",
+		"_postman_id": "ddf4de94-c0fe-487a-9b65-93f0ff7ff683",
 		"name": "MoviesAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "36152665"
@@ -15,6 +15,16 @@
 						{
 							"name": "Get MovieDetails By Movie Id",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjEwNDg4MiwiaWF0IjoxNzUyMTAxMjgyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.EHmNR9YanKYNXIf1nhhi9B6ptlb4hmnCYatZP08Azq_fh6twGgOle8IbYsNZxhDEwmhrTifR9XYa9FtKTcBWR2C-SQVuSrztvxDM4u7qP1PmSMDVlKoN1CF0VesaUDpWIXFv11-tjdDjstipya4O71PMNlyzTF7bu6N0C9icUfRnuIQJHa5pgV4vx64WQ_f3m1uTN4kpiLAV30zENbw1jjGK4MxvAU--lkXVqPp5mfF8tEuAlPQs6sNf6hcjV0da4t62ofxCP4Iqy34QJq32nQrwigRjTSn1m7mGqrxpqDMynsIErmy0kmD7aqBKTL7W-L-9KsXS0IvJBH9sOKYK6g",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -66,13 +76,48 @@
 					]
 				},
 				{
+					"name": "Directors",
+					"item": [
+						{
+							"name": "Update Movie Directors By Movie Id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"directorIds\": [1, 2]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/movies/1/directors",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies",
+										"1",
+										"directors"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Register Movies",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Filme de Exemplo 01\",\n    \"synopsis\": \"Isso aqui é um filme\",\n    \"directors\": [\n        {\n            \"id\": 1\n        }\n    ],\n    \"genre\": \"COMEDY\",\n    \"price\": 20.00,\n    \"ageRating\": \"Livre\",\n    \"movieDetails\": {\n        \"detailedSynopsis\": \"É só um filme\",\n        \"releaseDate\": \"2020-01-01\",\n        \"trailerUrl\": \"https://www.google.com\",\n        \"rate\": 5.5,\n        \"awards\": [\n            {\n                \"title\": \"Prêmio 01\",\n                \"description\": \"É um prêmio\",\n                \"year\": 2021\n            }\n        ]\n    }\n}",
+							"raw": "{\n    \"title\": \"Um morto muito louco\",\n    \"synopsis\": \"Dois perdedores tentam fingir que seu empregador assassinado está realmente vivo, o que leva o assassino a tentar localizá-lo para matá-lo.\",\n    \"directors\": [\n        {\n            \"id\": 1\n        }\n    ],\n    \"genre\": \"COMEDY\",\n    \"price\": 25.00,\n    \"ageRating\": \"Livre\",\n    \"movieDetails\": {\n        \"detailedSynopsis\": \"Fun-loving salesmen Richard (Jonathan Silverman) and Larry (Andrew McCarthy) are invited by their boss, Bernie (Terry Kiser), to stay the weekend at his posh beach house. Little do they know that Bernie is the perpetrator of a fraud they've uncovered and is arranging to have them killed. When the plan backfires and Bernie is killed instead, the buddies decide not to let a little death spoil their vacation. They pretend Bernie is still alive, leading to hijinks and corpse desecration galore. \",\n        \"releaseDate\": \"2020-01-01\",\n        \"trailerUrl\": \"https://www.imdb.com/pt/title/tt0098627/\",\n        \"rate\": 5.5,\n        \"awards\": [\n            {\n                \"title\": \"Prêmio 01\",\n                \"description\": \"É um prêmio\",\n                \"year\": 2021\n            }\n        ]\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -184,6 +229,395 @@
 							"port": "8080",
 							"path": [
 								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Directors",
+			"item": [
+				{
+					"name": "Get Paginated Directors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjE3MDAwNywiaWF0IjoxNzUyMTY2NDA3LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.kZTf9CfisL6I8RkZJV2oCYp6mjZG-wdY4b-fw4yD82Ewy1CiKyFBCFyejtr35t6LEIDla0ayzh94VC3jgMuQFivItHOEOLJYu_bQ0EJj3h7cKhnNpy9igSlzKYrkipaOqmM_GsP7WxosHiB8hM1QrnWEEhPmTHurtRcGg-CSwQ5GMM7TI1uhvcMy05O7rwM4VEX7nkL0mQDgYYh-pCMhrl2VoDgoWqeKXyxi9rHRoQnLR-pvSnHfI-DAfvQBg_zfAX0URXpalYoVHBy8yMDrbtOPc8XKLOykPssglSK_Ze8nbvPi16c_5PI7ROHaYj-mmAlzMNDfUMG9IWeunkdp8A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/directors?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directors"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Directors By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjEwNDg4MiwiaWF0IjoxNzUyMTAxMjgyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.EHmNR9YanKYNXIf1nhhi9B6ptlb4hmnCYatZP08Azq_fh6twGgOle8IbYsNZxhDEwmhrTifR9XYa9FtKTcBWR2C-SQVuSrztvxDM4u7qP1PmSMDVlKoN1CF0VesaUDpWIXFv11-tjdDjstipya4O71PMNlyzTF7bu6N0C9icUfRnuIQJHa5pgV4vx64WQ_f3m1uTN4kpiLAV30zENbw1jjGK4MxvAU--lkXVqPp5mfF8tEuAlPQs6sNf6hcjV0da4t62ofxCP4Iqy34QJq32nQrwigRjTSn1m7mGqrxpqDMynsIErmy0kmD7aqBKTL7W-L-9KsXS0IvJBH9sOKYK6g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/directors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Directors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjEwNDg4MiwiaWF0IjoxNzUyMTAxMjgyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.EHmNR9YanKYNXIf1nhhi9B6ptlb4hmnCYatZP08Azq_fh6twGgOle8IbYsNZxhDEwmhrTifR9XYa9FtKTcBWR2C-SQVuSrztvxDM4u7qP1PmSMDVlKoN1CF0VesaUDpWIXFv11-tjdDjstipya4O71PMNlyzTF7bu6N0C9icUfRnuIQJHa5pgV4vx64WQ_f3m1uTN4kpiLAV30zENbw1jjGK4MxvAU--lkXVqPp5mfF8tEuAlPQs6sNf6hcjV0da4t62ofxCP4Iqy34QJq32nQrwigRjTSn1m7mGqrxpqDMynsIErmy0kmD7aqBKTL7W-L-9KsXS0IvJBH9sOKYK6g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Quentin Tarantino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/directors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update DIrectors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjEwNDg4MiwiaWF0IjoxNzUyMTAxMjgyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.EHmNR9YanKYNXIf1nhhi9B6ptlb4hmnCYatZP08Azq_fh6twGgOle8IbYsNZxhDEwmhrTifR9XYa9FtKTcBWR2C-SQVuSrztvxDM4u7qP1PmSMDVlKoN1CF0VesaUDpWIXFv11-tjdDjstipya4O71PMNlyzTF7bu6N0C9icUfRnuIQJHa5pgV4vx64WQ_f3m1uTN4kpiLAV30zENbw1jjGK4MxvAU--lkXVqPp5mfF8tEuAlPQs6sNf6hcjV0da4t62ofxCP4Iqy34QJq32nQrwigRjTSn1m7mGqrxpqDMynsIErmy0kmD7aqBKTL7W-L-9KsXS0IvJBH9sOKYK6g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Tarantino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/directors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Directors By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjEwNDg4MiwiaWF0IjoxNzUyMTAxMjgyLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.EHmNR9YanKYNXIf1nhhi9B6ptlb4hmnCYatZP08Azq_fh6twGgOle8IbYsNZxhDEwmhrTifR9XYa9FtKTcBWR2C-SQVuSrztvxDM4u7qP1PmSMDVlKoN1CF0VesaUDpWIXFv11-tjdDjstipya4O71PMNlyzTF7bu6N0C9icUfRnuIQJHa5pgV4vx64WQ_f3m1uTN4kpiLAV30zENbw1jjGK4MxvAU--lkXVqPp5mfF8tEuAlPQs6sNf6hcjV0da4t62ofxCP4Iqy34QJq32nQrwigRjTSn1m7mGqrxpqDMynsIErmy0kmD7aqBKTL7W-L-9KsXS0IvJBH9sOKYK6g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/directors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"directors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Get Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"fulano@gmail.com\",\n    \"password\": \"123wasdqe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Register Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Fulano de Tal\",\n    \"isAdmin\": true,\n    \"birthday\": \"2000-01-01\",\n    \"username\": \"fulano@gmail.com\",\n    \"password\": \"123wasdqe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get Paginated Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjI3MTM2NCwiaWF0IjoxNzUyMjY3NzY0LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.RQfOpIlyTncj3bZbWMzPiIMFKZ20UZzFLxIR7n3_kX8Dk7iFcOooRDirs7pX9gvu40D9enx0TpZ7zLWoh2yXCNimdphGLcBpCkqj7GCVO-qG2xyxJpRvKJjqX_2i_dKC5x9HmYBWTSqHz_y852GhMh_1cHUzQqlwe-3Gp5JBT8oLS5l1B6w9rg8XFXoxwqI_zE3wp1zC8q4jEv4jWx3mhXusGNKJYD3SHlrh1R3snjKyHwWoLXHxuGS79tjHnP1CdbPEfutqRBpBomHj77kdXF5ss0WfJrE33Kt8SwAJreRSGZWYrYLfb3jXLO0yXfjIAa_YZKPMAHd1y8zPqsFwOQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjI2NzA2MywiaWF0IjoxNzUyMjYzNDYzLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.XVyiLAoZb1fvgNH54yh2FoF4531R6UbUfMTf77a4Kz1NO_GvKX1Nt8sOyeznYzbMc5z1m1_Oc6-mQstEjhH4d13ZCVFo54KE9RmNSuUnGaWN3x7NQe-SEtoUPCR0kERWoS-KcZiFL5XYfsB1RlUgLBpuxZB3wtp07D8VkeGSkXKpkw-RWGDlPdytRKs_AjaUT4JMzfqdizU9VHioT0rikOuZri9Cg1hOLuSqfEScxJsZ-mYvAV5hYHx-fJ39LYQuHqlUVqEt68ymLbhKvAJYziS36HM_LgnjIN5wmHoSzpGr6ALNlS9QLECf6xPnOEhg1gxI7a4dyM6RtFN034Ephg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchases\": [\n        { \"movieId\": 1 }\n    ],\n    \"rents\": [\n        { \"movieId\": 2 }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjI3MTM2NCwiaWF0IjoxNzUyMjY3NzY0LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.RQfOpIlyTncj3bZbWMzPiIMFKZ20UZzFLxIR7n3_kX8Dk7iFcOooRDirs7pX9gvu40D9enx0TpZ7zLWoh2yXCNimdphGLcBpCkqj7GCVO-qG2xyxJpRvKJjqX_2i_dKC5x9HmYBWTSqHz_y852GhMh_1cHUzQqlwe-3Gp5JBT8oLS5l1B6w9rg8XFXoxwqI_zE3wp1zC8q4jEv4jWx3mhXusGNKJYD3SHlrh1R3snjKyHwWoLXHxuGS79tjHnP1CdbPEfutqRBpBomHj77kdXF5ss0WfJrE33Kt8SwAJreRSGZWYrYLfb3jXLO0yXfjIAa_YZKPMAHd1y8zPqsFwOQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/1/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"1",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiZnVsYW5vQGdtYWlsLmNvbSIsImV4cCI6MTc1MjI3MTM2NCwiaWF0IjoxNzUyMjY3NzY0LCJzY29wZSI6IlJPTEVfQURNSU4ifQ.RQfOpIlyTncj3bZbWMzPiIMFKZ20UZzFLxIR7n3_kX8Dk7iFcOooRDirs7pX9gvu40D9enx0TpZ7zLWoh2yXCNimdphGLcBpCkqj7GCVO-qG2xyxJpRvKJjqX_2i_dKC5x9HmYBWTSqHz_y852GhMh_1cHUzQqlwe-3Gp5JBT8oLS5l1B6w9rg8XFXoxwqI_zE3wp1zC8q4jEv4jWx3mhXusGNKJYD3SHlrh1R3snjKyHwWoLXHxuGS79tjHnP1CdbPEfutqRBpBomHj77kdXF5ss0WfJrE33Kt8SwAJreRSGZWYrYLfb3jXLO0yXfjIAa_YZKPMAHd1y8zPqsFwOQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
 								"1"
 							]
 						}

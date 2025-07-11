@@ -22,6 +22,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE tb_movie_details SET deleted_at = CURRENT_TIMESTAMP where id=?")
 @SQLRestriction("deleted_at is null")
 public class MovieDetails extends BaseEntity {
+    @Column(columnDefinition = "TEXT")
     private String detailedSynopsis;
 
     private LocalDate releaseDate;

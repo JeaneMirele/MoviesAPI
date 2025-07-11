@@ -1,5 +1,6 @@
 package com.movies.api.controller;
 
+import com.movies.api.domain.Order;
 import com.movies.api.domain.SecurityUser;
 import com.movies.api.dto.OrderSaveRequestDto;
 import com.movies.api.mapper.OrderMapper;
@@ -34,15 +35,21 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<?> getAll(Pageable pageable) {
-        var result = orderService.findAllByClientId(getLoggedUser().getClient().getId(), pageable);
-
-        return ResponseEntity.ok(result.map(orderMapper::toDto));
+        var result = orderService.findAllByClientId(getLoggedUser().getClient().getId(), pageable)
+        .map(order -> {
+            var dto = orderMapper.toDto(order);
+            dto.loadLinks(order);
+            return dto;
+        });
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        var result = orderService.listById(id, getLoggedUser().getClient().getId());
-        return ResponseEntity.ok(orderMapper.toDto(result));
+        Order order = orderService.listById(id, getLoggedUser().getClient().getId());
+        var result = orderMapper.toDto(order);
+        result.loadLinks(order);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping

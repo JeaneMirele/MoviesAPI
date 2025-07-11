@@ -24,15 +24,21 @@ public class DirectorController {
 
     @GetMapping
     public ResponseEntity<?> getAll(Pageable pageable) {
-        var result = directorService.listAll(pageable).map(directorMapper::toDirectorResponseDto);
-        return ResponseEntity.ok(result);
-    }
-
+         var result = directorService.listAll(pageable)
+                 .map(director -> {
+                     var dto = directorMapper.toDirectorResponseDto(director);
+                     dto.loadLinks(director);
+                     return dto;
+                 });
+         return ResponseEntity.ok(result);
+     }
 
 
     @GetMapping("{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        var result = directorMapper.toDirectorWithMovieNames(directorService.listById(id));
+        Director director = directorService.listById(id);
+        var result = directorMapper.toDirectorWithMovieNames(director);
+        result.loadLinks(director);
         return ResponseEntity.ok(result);
     }
 

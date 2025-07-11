@@ -17,7 +17,6 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE tb_director SET deleted_at = CURRENT_TIMESTAMP where id=?")
 @SQLRestriction("deleted_at is null")
 public class Director extends BaseEntity {
-//    @NotBlank
     private String name;
 
     @ManyToMany(mappedBy = "directors")

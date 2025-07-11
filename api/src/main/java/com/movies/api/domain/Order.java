@@ -20,25 +20,25 @@ import jakarta.validation.constraints.NotNull;
 @Table(name = "tb_order")
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
 @SQLDelete(sql = "UPDATE tb_order SET deleted_at = CURRENT_TIMESTAMP where id=?")
 @SQLRestriction("deleted_at is null")
 public class Order extends BaseEntity {
 
-    @NotNull
     private LocalDate date;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @SQLRestriction("tipo = 'Purchase'")
     private List<Purchase> purchases;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @SQLRestriction("tipo = 'Rent'")
     private List<Rent> rents;
-    
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
+
+    public Order() {
+        this.date = LocalDate.now();
+    }
 }

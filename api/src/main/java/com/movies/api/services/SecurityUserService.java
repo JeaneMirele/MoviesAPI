@@ -24,6 +24,11 @@ public class SecurityUserService extends AbstractService<SecurityUser, Long, Sec
                 .orElseThrow(() -> new UsernameNotFoundException("not found user " + username));
     }
 
+    public SecurityUser findByUsername(String username){
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("not found user " + username));
+    }
+
     @Override
     public SecurityUser create(SecurityUser securityUser) {
         securityUser.setPassword(passwordEncoder.encode(securityUser.getPassword()));

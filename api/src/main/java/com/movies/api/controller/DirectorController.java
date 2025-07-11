@@ -8,6 +8,7 @@ import com.movies.api.services.DirectorService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,18 +37,21 @@ public class DirectorController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody DirectorSaveRequestDto dto) {
         directorService.create(directorMapper.toEntity(dto));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody DirectorUpdateRequestDto dto) {
         directorService.update(directorMapper.toEntity(dto));
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         directorService.deleteById(id);
         return ResponseEntity.noContent().build();

@@ -12,7 +12,7 @@ API REST desenvolvida em Java com Spring Boot. A aplicação realiza o gerenciam
 - Autenticação com JWT (stateless)
 - Busca paginada com filtros
 - API REST nível 3 (URIs, verbos, HATEOAS onde aplicável)
-- Documentação Swagger
+
 
 ---
 

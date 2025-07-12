@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignorar arquivos de chaves de certificado
+/src/main/resources/certs/*
+*.pem

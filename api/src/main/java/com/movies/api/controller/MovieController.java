@@ -1,5 +1,6 @@
 package com.movies.api.controller;
 
+import com.movies.api.domain.Movie;
 import com.movies.api.domain.MovieDetails;
 import com.movies.api.dto.*;
 import com.movies.api.mapper.MovieDetailsMapper;
@@ -33,14 +34,21 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<Page<MovieResponseDto>> getAll(Pageable pageable) {
-        var result = movieService.listAll(pageable).map(movieMapper::toResponseDto);
+        var result = movieService.listAll(pageable)
+        .map(movie -> {
+            var dto = movieMapper.toResponseDto(movie);
+            dto.loadLinks(movie);
+            return dto;
+        });
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<MovieResponseDto> getById(@PathVariable Long id) {
-        var result = movieService.listById(id);
-        return ResponseEntity.ok(movieMapper.toResponseDto(result));
+        Movie movie = movieService.listById(id);
+        var result = movieMapper.toResponseDto(movie);
+        result.loadLinks(movie);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping
@@ -66,7 +74,9 @@ public class MovieController {
 
     @GetMapping("{id}/details")
     public ResponseEntity<MovieDetailsDto> getMovieDetailsByMovieId(@PathVariable Long id) {
-        var result = movieDetailsMapper.toMovieDetailsDto(movieService.listById(id).getMovieDetails());
+        MovieDetails movieDetails = movieService.listById(id).getMovieDetails();
+        var result = movieDetailsMapper.toMovieDetailsDto(movieDetails);
+        result.loadLinks(movieDetails);
         return ResponseEntity.ok(result);
     }
 

@@ -33,4 +33,5 @@ build/
 .vscode/
 
 # Ignorar arquivos de chaves de certificado
-/src/main/resources/certs/
+/src/main/resources/certs/*
+*.pem

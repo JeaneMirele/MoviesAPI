@@ -1,7 +1,3 @@
-FROM ubuntu:latest
-LABEL authors="Jeane"
-
-ENTRYPOINT ["top", "-b"]
 # Etapa de build: utilizando a imagem do OpenJDK 24 para compilar o projeto com Maven Wrapper
 FROM openjdk:21-jdk AS build
 
